@@ -13,20 +13,30 @@
         android:theme="@style/Theme.Androidpractice"
         tools:targetApi="31">
         <activity
-            android:name=".activities.SecondActivity"
+            android:name=".activities.ThirdActivity"
+            android:label="ThirdActivity"
             android:exported="false" />
+
         <activity
-            android:name=".activities.FirstActivity"
+            android:name=".activities.SecondActivity"
+            android:label="SecondActivity"
             android:exported="false" />
+
+        <activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".activities.FirstActivity"
+            android:label="FirstActivity"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
