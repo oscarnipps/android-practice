@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.android.android_practice.activities.FirstActivity
+import com.android.android_practice.lifecycle.LifecyclePracticeActivity
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -15,8 +16,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Timber.d("onCreate called")
     }
+
     fun showActivitiesPractice(view: View) {
         Intent(this , FirstActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    fun showLifecyclePractice(view: View) {
+        Intent(this , LifecyclePracticeActivity::class.java).apply {
             startActivity(this)
         }
     }

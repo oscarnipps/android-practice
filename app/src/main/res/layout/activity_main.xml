@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:onClick="showLifecyclePractice"
             android:layout_width="match_parent"
             android:padding="12dp"
             android:layout_margin="16dp"
