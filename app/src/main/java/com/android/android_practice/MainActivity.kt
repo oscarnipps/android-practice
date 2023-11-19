@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import com.android.android_practice.activities.FirstActivity
 import com.android.android_practice.lifecycle.LifecyclePracticeActivity
+import com.android.android_practice.permissions.PermissionActivity
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     fun showLifecyclePractice(view: View) {
         Intent(this , LifecyclePracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    fun showPermissionsPractice(view: View) {
+        Intent(this , PermissionActivity::class.java).apply {
             startActivity(this)
         }
     }
