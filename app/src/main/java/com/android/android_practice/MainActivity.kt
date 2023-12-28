@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.android.android_practice.activities.FirstActivity
+import com.android.android_practice.fragments.FragmentPracticeActivity
 import com.android.android_practice.lifecycle.LifecyclePracticeActivity
 import com.android.android_practice.permissions.PermissionActivity
 import timber.log.Timber
@@ -35,4 +36,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(this)
         }
     }
+
+    fun showFragmentsPractice(view: View) {
+        Intent(this , FragmentPracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
 }
