@@ -8,6 +8,7 @@ import android.view.View
 import com.android.android_practice.activities.FirstActivity
 import com.android.android_practice.fragments.FragmentPracticeActivity
 import com.android.android_practice.lifecycle.LifecyclePracticeActivity
+import com.android.android_practice.navigation_component.NavigationPracticeActivity
 import com.android.android_practice.permissions.PermissionActivity
 import timber.log.Timber
 
@@ -39,6 +40,12 @@ class MainActivity : AppCompatActivity() {
 
     fun showFragmentsPractice(view: View) {
         Intent(this , FragmentPracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    fun showNavigationPractice(view: View) {
+        Intent(this , NavigationPracticeActivity::class.java).apply {
             startActivity(this)
         }
     }

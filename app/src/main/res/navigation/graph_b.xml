@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_b"
+    app:startDestination="@id/graphBDesA">
+
+    <fragment
+        android:id="@+id/graphBDesA"
+        android:name="com.android.android_practice.navigation_component.GraphBDesA"
+        android:label="fragment_graph_b_des_a"
+        tools:layout="@layout/fragment_graph_b_des_a" />
+    <fragment
+        android:id="@+id/graphBDesB"
+        android:name="com.android.android_practice.navigation_component.GraphBDesB"
+        android:label="fragment_graph_b_des_b"
+        tools:layout="@layout/fragment_graph_b_des_b" />
+</navigation>

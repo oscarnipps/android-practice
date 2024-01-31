@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_a"
+    app:startDestination="@id/graphADesA">
+
+    <fragment
+        android:id="@+id/graphADesA"
+        android:name="com.android.android_practice.navigation_component.GraphADesA"
+        android:label="fragment_graph_a_des_a"
+        tools:layout="@layout/fragment_graph_a_des_a" >
+        <action
+            android:id="@+id/action_graphADesA_to_graphADesB"
+            app:destination="@id/graphADesB" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/graphADesB"
+        android:name="com.android.android_practice.navigation_component.GraphADesB"
+        android:label="fragment_graph_a_des_b"
+        tools:layout="@layout/fragment_graph_a_des_b" />
+
+</navigation>

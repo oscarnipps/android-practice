@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_graph"
+    app:startDestination="@id/baseDesA">
+
+    <fragment
+        android:id="@+id/baseDesA"
+        android:name="com.android.android_practice.navigation_component.BaseDesA"
+        android:label="BaseDesA"
+        tools:layout="@layout/fragment_base_des_a">
+
+        <action
+            android:id="@+id/action_baseDesA_to_graph_a"
+            app:destination="@id/graph_a" />
+
+    </fragment>
+
+
+    <include app:graph="@navigation/graph_a"/>
+
+    <include app:graph="@navigation/graph_b"/>
+
+    <include app:graph="@navigation/graph_c"/>
+    <fragment
+        android:id="@+id/globalDesA"
+        android:name="com.android.android_practice.navigation_component.GlobalDesA"
+        android:label="fragment_global_des_a"
+        tools:layout="@layout/fragment_global_des_a" />
+
+</navigation>
