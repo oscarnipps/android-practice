@@ -9,7 +9,18 @@
         android:id="@+id/graphBDesA"
         android:name="com.android.android_practice.navigation_component.GraphBDesA"
         android:label="fragment_graph_b_des_a"
-        tools:layout="@layout/fragment_graph_b_des_a" />
+        tools:layout="@layout/fragment_graph_b_des_a" >
+
+        <action
+            android:id="@+id/action_graphBDesA_to_graphCDesA"
+            app:destination="@id/graphCDesA"/>
+
+        <action
+            android:id="@+id/action_graphBDesA_to_graphBDesB"
+            app:destination="@id/graphBDesB" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/graphBDesB"
         android:name="com.android.android_practice.navigation_component.GraphBDesB"

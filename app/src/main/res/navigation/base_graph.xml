@@ -23,10 +23,12 @@
     <include app:graph="@navigation/graph_b"/>
 
     <include app:graph="@navigation/graph_c"/>
+
     <fragment
         android:id="@+id/globalDesA"
         android:name="com.android.android_practice.navigation_component.GlobalDesA"
         android:label="fragment_global_des_a"
         tools:layout="@layout/fragment_global_des_a" />
+
 
 </navigation>

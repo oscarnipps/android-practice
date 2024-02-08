@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.android.android_practice.R
 import com.android.android_practice.databinding.FragmentBaseDesABinding
 
@@ -24,8 +25,8 @@ class BaseDesA : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNavToGraphA.setOnClickListener {
-
+        binding.btnNavToGraphADesA.setOnClickListener {
+            findNavController().navigate(R.id.action_baseDesA_to_graph_a)
         }
     }
 }

@@ -12,12 +12,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_back"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawableTop="@drawable/ic_destination"
             android:drawablePadding="10dp"
-            android:text="Graph A Destination A"
+            android:text="Destination A"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="19sp"
@@ -37,12 +44,37 @@
             />
 
         <Button
-            android:id="@+id/btn_nav_to_graph_a"
+            android:id="@+id/btn_nav_to_graph_a_des_b"
             android:layout_width="match_parent"
             android:padding="12dp"
             android:layout_margin="16dp"
             android:layout_height="wrap_content"
-            android:text="navigate to graph A"
+            android:text="navigate to graph A destination B"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_nav_to_graph_b_des_a"
+            android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:text="navigate to graph B destination A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_nav_to_graph_c_des_b"
+            android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="8dp"
+            android:text="navigate to graph C destination B via DeepLink"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

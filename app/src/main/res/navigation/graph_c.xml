@@ -9,10 +9,19 @@
         android:id="@+id/graphCDesA"
         android:name="com.android.android_practice.navigation_component.GraphCDesA"
         android:label="fragment_graph_c_des_a"
-        tools:layout="@layout/fragment_graph_c_des_a" />
+        tools:layout="@layout/fragment_graph_c_des_a">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="androidpractice://destinations/graphc/a" />
+    </fragment>
+
     <fragment
         android:id="@+id/graphCDesB"
         android:name="com.android.android_practice.navigation_component.GraphCDesB"
         android:label="fragment_graph_c_des_b"
-        tools:layout="@layout/fragment_graph_c_des_b" />
+        tools:layout="@layout/fragment_graph_c_des_b">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="androidpractice://destinations/graphc/b" />
+    </fragment>
 </navigation>

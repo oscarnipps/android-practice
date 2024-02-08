@@ -13,12 +13,22 @@
         <action
             android:id="@+id/action_graphADesA_to_graphADesB"
             app:destination="@id/graphADesB" />
+
+        <action
+            android:id="@+id/action_graphADesA_to_graphBDesA"
+            app:destination="@id/graph_b" />
+
     </fragment>
 
     <fragment
         android:id="@+id/graphADesB"
         android:name="com.android.android_practice.navigation_component.GraphADesB"
         android:label="fragment_graph_a_des_b"
-        tools:layout="@layout/fragment_graph_a_des_b" />
+        tools:layout="@layout/fragment_graph_a_des_b" >
+        <argument
+            android:name="graphADesBStringArg"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
 
 </navigation>
