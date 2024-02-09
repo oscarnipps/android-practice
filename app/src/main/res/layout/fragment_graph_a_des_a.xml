@@ -80,6 +80,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/btn_nav_to_graph_b_des_b"
+            android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="8dp"
+            android:text="navigate to graph B destination B with data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </LinearLayout>
 
 </ScrollView>

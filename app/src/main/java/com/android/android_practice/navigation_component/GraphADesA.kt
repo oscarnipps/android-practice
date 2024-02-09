@@ -50,8 +50,16 @@ class GraphADesA : Fragment() {
             )
         }
 
+        //todo: this you need to override the start destination of the graph to the required destination
+        binding.btnNavToGraphBDesB.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_graphADesA_to_graphBDesB
+            )
+        }
+
         binding.btnNavToGraphCDesB.setOnClickListener {
             findNavController().navigate(
+                //URI should be the same as in the navigation graph file
                 Uri.parse("androidpractice://destinations/graphc/b")
             )
         }

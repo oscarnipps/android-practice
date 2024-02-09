@@ -20,6 +20,9 @@ class GraphBDesA : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_graph_b_des_a,container,false)
         return binding.root
     }
