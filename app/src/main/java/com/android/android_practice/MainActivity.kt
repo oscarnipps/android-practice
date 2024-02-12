@@ -10,6 +10,7 @@ import com.android.android_practice.fragments.FragmentPracticeActivity
 import com.android.android_practice.lifecycle.LifecyclePracticeActivity
 import com.android.android_practice.navigation_component.NavigationPracticeActivity
 import com.android.android_practice.permissions.PermissionActivity
+import com.android.android_practice.recyclerview.RecyclerViewPracticeActivity
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +44,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(this)
         }
     }
+
+    fun showRecyclerViewPractice(view: View) {
+        Intent(this , RecyclerViewPracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
 
     fun showNavigationPractice(view: View) {
         Intent(this , NavigationPracticeActivity::class.java).apply {

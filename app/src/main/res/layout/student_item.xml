@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="16dp"
+    android:background="#6721E3"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="david barnes"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:layout_margin="8dp"
+        />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="17 years"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:layout_margin="8dp"
+        />
+
+</LinearLayout>
+</layout>
