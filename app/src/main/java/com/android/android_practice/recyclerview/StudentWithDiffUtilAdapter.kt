@@ -11,7 +11,7 @@ import com.android.android_practice.databinding.StudentItemBinding
 
 /*
 * uses diff util callback with listAdapter to optimize the the list loading display by calculating
-* the updates when new items are added to the recyclerview on a main thread
+* the updates when new items are added to the recyclerview on ( the difference calculations are done on the main thread)
 * */
 class StudentWithDiffUtilAdapter : ListAdapter<Student,StudentWithDiffUtilAdapter.StudentWithDiffUtilViewHolder> (StudentDiffUtilCallback()){
 

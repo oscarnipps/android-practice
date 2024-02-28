@@ -2,13 +2,12 @@ package com.android.android_practice.recyclerview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ConcatAdapter
 import com.android.android_practice.R
 import com.android.android_practice.databinding.ActivityRecyclerViewPracticeBinding
-import com.android.android_practice.databinding.StudentItemBinding
 
 class RecyclerViewPracticeActivity : AppCompatActivity() {
 
@@ -16,14 +15,25 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
 
     private lateinit var studentRecyclerViewAdapter: StudentRecyclerViewAdapter
 
+    private lateinit var studentHeaderRecyclerViewAdapter: StudentHeaderRecyclerViewAdapter
+
+    private lateinit var studentFooterRecyclerViewAdapter: StudentFooterRecyclerViewAdapter
+
+    private lateinit var sectionedRecyclerViewAdapter: SectionedRecyclerViewAdapter
+
+    private lateinit var concatViewAdapter: ConcatAdapter
+
     private lateinit var studentWithDiffUtilAdapter: StudentWithDiffUtilAdapter
 
     private lateinit var studentWithAsyncListDifferAdapter: StudentWithAsyncListDifferAdapter
 
     private var studentList = getStudents()
 
-    //1 -> basic recyclerview set up , 2 -> recyclerview with diff util , 3 -> recyclerview with async list differ
-    private val adapterFlag = 1
+    //1 -> basic recyclerview set up ,
+    //2 -> recyclerview with diff util ,
+    //3 -> recyclerview with async list differ
+    //4 -> recyclerview with multiple adapters
+    private val adapterFlag = 5
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,13 +41,16 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_recycler_view_practice)
 
-
         when (adapterFlag) {
             1 -> setUpBasicRecyclerView()
 
             2 -> setUpRecyclerViewWithDiffUtil()
 
             3 -> setUpRecyclerViewWithAsyncListDiffer()
+
+            4 -> setUpRecyclerViewWithDifferentAdapters()
+
+            5 -> setUpSectionedRecyclerViewAdapter()
         }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -60,7 +73,9 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
 
             for (student in studentList) {
                 //can have custom requirement if the check against the query text typed fails
-                if (student.name.lowercase().contains(query) || student.age.toString().contains(query)) {
+                if (student.name.lowercase().contains(query) || student.age.toString()
+                        .contains(query)
+                ) {
                     filteredList.add(student)
                 }
             }
@@ -77,10 +92,62 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
                     2 -> studentWithDiffUtilAdapter.submitList(filteredList)
 
                     3 -> studentWithAsyncListDifferAdapter.submitList(filteredList)
+
+                    4 -> {
+                        //todo update adapter with list items
+                    }
                 }
             }
 
         }
+    }
+
+    private fun setUpSectionedRecyclerViewAdapter() {
+        sectionedRecyclerViewAdapter = SectionedRecyclerViewAdapter()
+
+        val recyclerView = binding.studentRecyclerView
+
+        recyclerView.adapter = sectionedRecyclerViewAdapter
+
+        val items = getStudents().sortedBy { it.name }
+            .groupBy { SectionedItem.HeaderItems(it.name.uppercase()[0]) }
+            .flatMap { (key, value) ->
+                listOf(key) + value.map { SectionedItem.SectionItems(it) }
+            }
+
+
+        sectionedRecyclerViewAdapter.submitList(items)
+    }
+
+    private fun toPurchaseItem(student: Student): SectionedItem {
+        return SectionedItem.SectionItems(student)
+    }
+
+    private fun setUpRecyclerViewWithDifferentAdapters() {
+        //populate / initialize adapters
+        studentRecyclerViewAdapter = StudentRecyclerViewAdapter()
+
+        studentHeaderRecyclerViewAdapter = StudentHeaderRecyclerViewAdapter()
+
+        studentHeaderRecyclerViewAdapter.setItems(StudentMapper.mapToStudentHeader(studentList))
+
+        studentRecyclerViewAdapter.setItems(studentList)
+
+        //todo: implement footer later when needed
+        //studentFooterRecyclerViewAdapter = StudentFooterRecyclerViewAdapter()
+
+
+        //add as much adapter's as possible
+        //order of adapters also important
+        //also has possibility to remove and add adapters
+        concatViewAdapter = ConcatAdapter(
+            studentHeaderRecyclerViewAdapter,
+            studentRecyclerViewAdapter
+        )
+
+        val recyclerView = binding.studentRecyclerView
+
+        recyclerView.adapter = concatViewAdapter
     }
 
     private fun setUpBasicRecyclerView() {
