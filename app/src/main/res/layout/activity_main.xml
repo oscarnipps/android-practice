@@ -36,6 +36,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <Button
+            android:onClick="showViewModelPractice"
+            android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:text="Viewmodel and state practice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:onClick="showPermissionsPractice"
             android:layout_width="match_parent"

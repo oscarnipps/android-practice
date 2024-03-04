@@ -11,6 +11,7 @@ import com.android.android_practice.lifecycle.LifecyclePracticeActivity
 import com.android.android_practice.navigation_component.NavigationPracticeActivity
 import com.android.android_practice.permissions.PermissionActivity
 import com.android.android_practice.recyclerview.RecyclerViewPracticeActivity
+import com.android.android_practice.viewmodel.ViewModelPracticeActivity
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -54,6 +55,12 @@ class MainActivity : AppCompatActivity() {
 
     fun showNavigationPractice(view: View) {
         Intent(this , NavigationPracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    fun showViewModelPractice(view: View) {
+        Intent(this , ViewModelPracticeActivity::class.java).apply {
             startActivity(this)
         }
     }
