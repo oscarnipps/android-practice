@@ -2,4 +2,5 @@
     <string name="app_name">Android Practice</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="counter_message">you increased the counter %d times</string>
+    <string name="shopping_items">Shopping Items : \n %s</string>
 </resources>

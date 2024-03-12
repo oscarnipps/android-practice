@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.android.android_practice.activities.FirstActivity
+import com.android.android_practice.coroutines.CoroutinesPracticeActivity
 import com.android.android_practice.fragments.FragmentPracticeActivity
 import com.android.android_practice.lifecycle.LifecyclePracticeActivity
 import com.android.android_practice.navigation_component.NavigationPracticeActivity
@@ -64,5 +65,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(this)
         }
     }
+
+    fun showCoroutinesPractice(view: View) {
+        Intent(this , CoroutinesPracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
 
 }
