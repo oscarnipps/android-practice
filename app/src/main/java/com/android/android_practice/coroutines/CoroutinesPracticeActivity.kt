@@ -2,6 +2,7 @@ package com.android.android_practice.coroutines
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
@@ -13,15 +14,15 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.lang.IllegalArgumentException
 
 /*
 * Notes :
@@ -90,9 +91,20 @@ import timber.log.Timber
 class CoroutinesPracticeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoroutinesPracticeBinding
+    
+    //better way would be to inject it via dependency injection
+    private val repo = CoroutinePracticeRepo()
+
+    private val viewModel by viewModels<CoroutinesPracticeViewModel>()
 
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { context, throwable ->
+        //check and handle the type of exception
+        if (throwable is IllegalArgumentException) {
+            Timber.d("IllegalArgumentException caught : ${throwable.localizedMessage}")
+            return@CoroutineExceptionHandler
+        }
+
         Timber.d("exception caught : ${throwable.localizedMessage}")
         //showErrorView(throwable.localizedMessage ?: "")
     }
@@ -105,12 +117,16 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_coroutines_practice)
 
-        showCustomCoroutineScope()
+        //showCustomCoroutineScope()
+
+        viewModel.getShoppingItems3()
+
+        showViewModelScope()
     }
 
     private fun showGlobalScope() {
         lifecycleScope.launch {
-            val items = getShoppingItems1()
+            val items = repo.getShoppingItems1()
 
             updateUi(items)
         }
@@ -126,7 +142,7 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
     private fun showAsyncAwait() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val result = async { getShoppingItems1() }
+                val result = async { repo.getShoppingItems1() }
 
                 val items = result.await()
 
@@ -141,11 +157,11 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
         //can also chain child coroutines like this (i.e calling individual .launch() on the customSupervisorScope )
         /*customSupervisorScope.launch {
             //this would throw an exception but because it's in a supervisor scope it would not cancel it's siblings coroutines
-            combinedResult.plus( getShoppingItemsWithError())
+            combinedResult.plus( repo.getShoppingItemsWithError())
         }
 
         customSupervisorScope.launch {
-            combinedResult.plus( getShoppingItems1())
+            combinedResult.plus( repo.getShoppingItems1()())
         }
 
         customSupervisorScope.launch {
@@ -156,11 +172,11 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
 
         customSupervisorScope.launch {
             supervisorScope {
-                launch { combinedResult.addAll(getShoppingItemsWithError()) }.join()
+                launch { combinedResult.addAll(repo.getShoppingItemsWithError()) }.join()
 
-                launch { combinedResult.addAll(getShoppingItems1()) }.join()
+                launch { combinedResult.addAll(repo.getShoppingItems1()) }.join()
 
-                launch { combinedResult.addAll(getShoppingItems2()) }.join()
+                launch { combinedResult.addAll(repo.getShoppingItems2()) }.join()
 
                 withContext(Dispatchers.Main){
                     updateUi(combinedResult)
@@ -170,12 +186,21 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
         }
     }
 
+    private fun showViewModelScope() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.itemsState.collectLatest {
+                    updateUi(it)
+                }
+            }
+        }
+    }
 
     private fun showErrorHandlingWithTryCatch() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
-                    val items = getShoppingItemsWithError()
+                    val items = repo.getShoppingItemsWithError()
                 } catch (e: Exception) {
                     showErrorView(e.localizedMessage ?: "")
                 }
@@ -187,7 +212,7 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val items = runCatching {
-                    getShoppingItemsWithError()
+                    repo.getShoppingItemsWithError()
                 }
 
                 if (items.isSuccess) {
@@ -211,32 +236,11 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
 
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                val items = getShoppingItemsWithError()
+                val items = repo.getShoppingItemsWithError()
 
                 updateUi(items)
             }
         }
-    }
-
-    private suspend fun getShoppingItems1(): List<String> {
-        delay(2000)
-
-        Timber.d("items 1 work done")
-
-        return listOf("shoes", "socks", "necklace")
-    }
-
-    private suspend fun getShoppingItems2(): List<String> {
-        delay(3000)
-
-        Timber.d("items 2 work done")
-
-        return listOf("shirt", "boxes")
-    }
-
-    private suspend fun getShoppingItemsWithError(): List<String> {
-        delay(1000)
-        throw Exception("error getting items 3")
     }
 
     private fun updateUi(items: List<String>) {
