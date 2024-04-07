@@ -1,12 +1,12 @@
 package com.android.android_practice
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.android.android_practice.activities.FirstActivity
 import com.android.android_practice.coroutines.CoroutinesPracticeActivity
+import com.android.android_practice.flows.FlowsPracticeActivity
 import com.android.android_practice.fragments.FragmentPracticeActivity
 import com.android.android_practice.lifecycle.LifecyclePracticeActivity
 import com.android.android_practice.navigation_component.NavigationPracticeActivity
@@ -71,6 +71,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(this)
         }
     }
+
+    fun showFlowsPractice(view: View) {
+        Intent(this , FlowsPracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+
 
 
 }
