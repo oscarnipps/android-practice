@@ -98,6 +98,7 @@ class FlowPracticeRepo {
     //resubscribes to the flow and tries the process again based on the retry parameters ( backOff policy , number of retries)
     //it provides a way to recover from errors and continue processing the Flow
     //can also use 'retryWhen' operator
+    //also note that using a 'yufretry' operator after a 'catch' operator in the chains of operator on the flow would not work (has to be before the 'catch' operator)
     private fun showRetryOperator(): Flow<String> {
         return getFLowWithException()
             .retry(2) { cause ->

@@ -17,12 +17,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.supervisorScope
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /*
 * Notes :
@@ -87,6 +92,14 @@ import timber.log.Timber
 *
 * - for async the error is thrown when await() is called so error needs to be handled at that point
 *
+* - to use a callback within a coroutine use either (NOTE : 'suspendCoroutine' and 'suspendCancellableCoroutine' are both used for one-shot callbacks but for continuous stream use 'callbackFlow') :
+*       -> suspendCoroutine{... } : where you wrap the callback method in a suspendCoroutine block and either resume via the 'continuation' value or resume with exception
+*          i.e continuation.resume(callbackSuccessResult or callbackErrorResult) or continuation.resumeWithException(callbackErrorResult)
+*
+*      -> suspendCancellableCoroutine{... } : same as the "suspendCoroutine" counterpart but it offers cancellation extras , meaning you can specify what happens when the callback coroutine is cancelled
+*          i.e continuation.invokeOnCancellation { ... }. Note that you must specify it within the "suspendCancellableCoroutine" block
+*
+*     -> callbackFlow{... } : used for continuous stream of data
 */
 class CoroutinesPracticeActivity : AppCompatActivity() {
 
@@ -96,6 +109,8 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
     private val repo = CoroutinePracticeRepo()
 
     private val viewModel by viewModels<CoroutinesPracticeViewModel>()
+
+    private val api : Api = Api()
 
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { context, throwable ->
@@ -256,5 +271,73 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
 
         Timber.d("exception caught : $errorMessage")
     }
+
+    private fun showCallBackCoroutine() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val result = coroutineCallback()
+                println(result)
+            }
+        }
+    }
+
+    private fun showCallBackFlow() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flowCallback().collect{ flowResult ->
+                    println(flowResult)
+                }
+            }
+        }
+    }
+
+    private suspend  fun coroutineCallback(): String = suspendCancellableCoroutine { continuation ->
+        val callback = object : ResultCallback { // Implementation of some callback interface
+            override fun onCompleted(result: String) {
+                // Resume coroutine with a value provided by the callback
+                continuation.resume(result)
+            }
+            override fun onError(cause: Throwable) {
+                // Resume coroutine with an exception provided by the callback
+                continuation.resumeWithException(cause)
+            }
+        }
+
+        // Register callback with an API
+        api.register(callback)
+
+        // Remove callback on cancellation
+        continuation.invokeOnCancellation { api.unregister(callback) }
+        // At this point the coroutine is suspended by suspendCancellableCoroutine until callback fires
+    }
+
+    private suspend  fun flowCallback() = callbackFlow<String> {
+        val callback = object : ResultCallback { // Implementation of some callback interface
+            override fun onCompleted(result: String) {
+                //send updated result (in this case success)
+                trySend(result)
+            }
+            override fun onError(cause: Throwable) {
+                //send updated result (in this case error)
+                trySend(cause.toString())
+            }
+        }
+
+        //handle clean up when the callback flow is closed
+        awaitClose { api.unregister(callback) }
+    }
+
+    interface ResultCallback{
+        fun  onCompleted(result : String)
+        fun onError(cause: Throwable)
+    }
+
+    class Api{
+        fun register(callback: ResultCallback){}
+
+        fun unregister(callback: ResultCallback){}
+    }
+
+
 
 }

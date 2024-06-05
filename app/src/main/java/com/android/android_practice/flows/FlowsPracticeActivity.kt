@@ -81,15 +81,14 @@ class FlowsPracticeActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_flows_practice)
 
-        //viewModel.getUiState1()
-
-        //showUiStateWithFlowWithOperator()
+        viewModel.getUiState1()
+        showUiStateWithFlowWithOperator()
 
         //showUiStateWithRepeatOnLifecycle()
 
         //showWithConfiguredStateFlow()
 
-        showFlowOperators()
+        //showFlowOperators()
     }
 
     private fun showUiStateWithRepeatOnLifecycle() {
@@ -105,7 +104,7 @@ class FlowsPracticeActivity : AppCompatActivity() {
     //used when you are only collecting one flow (it takes the lifecycle into account)
     private fun showUiStateWithFlowWithOperator() {
         lifecycleScope.launch {
-            viewModel.uiState1.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collectLatest {
+            viewModel.uiState1.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
                 updateUi(it)
             }
         }

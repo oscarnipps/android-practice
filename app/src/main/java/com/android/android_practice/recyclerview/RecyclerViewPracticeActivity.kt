@@ -1,15 +1,16 @@
 package com.android.android_practice.recyclerview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ConcatAdapter
 import com.android.android_practice.R
 import com.android.android_practice.databinding.ActivityRecyclerViewPracticeBinding
 
-class RecyclerViewPracticeActivity : AppCompatActivity() {
+class RecyclerViewPracticeActivity : AppCompatActivity() ,
+    StudentRecyclerViewAdapter.StudentRecyclerViewAdapterItemListener {
 
     private lateinit var binding: ActivityRecyclerViewPracticeBinding
 
@@ -33,7 +34,7 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
     //2 -> recyclerview with diff util ,
     //3 -> recyclerview with async list differ
     //4 -> recyclerview with multiple adapters
-    private val adapterFlag = 5
+    private val adapterFlag = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,7 +126,7 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
 
     private fun setUpRecyclerViewWithDifferentAdapters() {
         //populate / initialize adapters
-        studentRecyclerViewAdapter = StudentRecyclerViewAdapter()
+        studentRecyclerViewAdapter = StudentRecyclerViewAdapter(this)
 
         studentHeaderRecyclerViewAdapter = StudentHeaderRecyclerViewAdapter()
 
@@ -153,7 +154,7 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
     private fun setUpBasicRecyclerView() {
         val recyclerView = binding.studentRecyclerView
 
-        studentRecyclerViewAdapter = StudentRecyclerViewAdapter()
+        studentRecyclerViewAdapter = StudentRecyclerViewAdapter(this)
 
         recyclerView.adapter = studentRecyclerViewAdapter
 
@@ -197,5 +198,7 @@ class RecyclerViewPracticeActivity : AppCompatActivity() {
         )
     }
 
-
+    override fun onStudentRecyclerItemClicked(student: Student) {
+        Toast.makeText(this, student.name,Toast.LENGTH_SHORT).show()
+    }
 }

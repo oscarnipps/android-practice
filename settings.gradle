@@ -1,3 +1,4 @@
+//plugins that extend gradle this are located in the  'gradlePluginPortal()' but provided through other repositories
 pluginManagement {
     repositories {
         google()
@@ -5,6 +6,15 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+//NOTE
+//the settings file could have a plugins block , apply plugins to share config among builds via the plugins{...} block
+//  plugins{
+//    id("path-to-plugin")
+//  }
+
+//defines locations where gradle can look for components that the build depends on
+//could also be binary repositories like mavenCentral() or other gradle builds i.e via includeBuild("path-to-build")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,5 +22,12 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+//the project name
 rootProject.name = "android-practice"
+
+//defines sub-projects / modules via using the include() statement
 include ':app'
+include ':java-module'
+include ':kotlin-module'
+include ':android-module'

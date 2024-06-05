@@ -9,10 +9,14 @@ import com.android.android_practice.R
 import com.android.android_practice.databinding.StudentItemBinding
 
 //using basic recyclerview
-class StudentRecyclerViewAdapter (): RecyclerView.Adapter<StudentRecyclerViewAdapter.StudentViewHolder>() {
+class StudentRecyclerViewAdapter (var listener : StudentRecyclerViewAdapterItemListener): RecyclerView.Adapter<StudentRecyclerViewAdapter.StudentViewHolder>() {
 
     private lateinit var binding :StudentItemBinding
     private var students  = mutableListOf<Student>()
+
+    interface StudentRecyclerViewAdapterItemListener{
+        fun onStudentRecyclerItemClicked (student: Student)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.student_item,parent,false)
@@ -33,6 +37,13 @@ class StudentRecyclerViewAdapter (): RecyclerView.Adapter<StudentRecyclerViewAda
     }
 
     inner class StudentViewHolder(private val itemBinding: StudentItemBinding) : ViewHolder(itemBinding.root){
+
+        init {
+            itemBinding.studentItemContainer.setOnClickListener {
+                listener.onStudentRecyclerItemClicked(students[bindingAdapterPosition])
+            }
+        }
+
         fun bind(student: Student) {
             itemBinding.name.text = student.name
             itemBinding.age.text = student.age.toString()

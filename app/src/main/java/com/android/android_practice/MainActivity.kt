@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.android_practice.activities.FirstActivity
 import com.android.android_practice.coroutines.CoroutinesPracticeActivity
+import com.android.android_practice.espresso_practice.EspressoPracticeActivity
 import com.android.android_practice.flows.FlowsPracticeActivity
 import com.android.android_practice.fragments.FragmentPracticeActivity
 import com.android.android_practice.lifecycle.LifecyclePracticeActivity
@@ -78,7 +79,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-
+    fun showEspressoPractice(view: View) {
+        Intent(this , EspressoPracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
 }

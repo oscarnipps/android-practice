@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".espresso_practice.SecondEspressoPracticeActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Espresso Students Details"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:layout_margin="16dp"
+            app:drawableTopCompat="@drawable/ic_destination" />
+
+        <TextView
+            android:id="@+id/student_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="15"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="21sp"
+            android:layout_margin="8dp"
+            />
+
+        <TextView
+            android:id="@+id/student_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="James Bob"
+            android:textAlignment="center"
+            android:textSize="21sp"
+            android:layout_margin="8dp"
+            />
+
+        <TextView
+            android:id="@+id/student_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="36"
+            android:textAlignment="center"
+            android:textSize="21sp"
+            android:layout_margin="8dp"
+            />
+
+    </LinearLayout>
+</layout>

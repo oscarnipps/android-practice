@@ -13,6 +13,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/showActivitiesPractice"
             android:onClick="showActivitiesPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -25,6 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/showLifecyclePractice"
             android:onClick="showLifecyclePractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -38,6 +40,7 @@
 
 
         <Button
+            android:id="@+id/showViewModelPractice"
             android:onClick="showViewModelPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -50,6 +53,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/showPermissionsPractice"
             android:onClick="showPermissionsPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -62,6 +66,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/showFragmentsPractice"
             android:onClick="showFragmentsPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -74,6 +79,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/showNavigationPractice"
             android:onClick="showNavigationPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -86,6 +92,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/showRecyclerViewPractice"
             android:onClick="showRecyclerViewPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -98,6 +105,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/showCoroutinesPractice"
             android:onClick="showCoroutinesPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
@@ -110,12 +118,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/showFlowsPractice"
             android:onClick="showFlowsPractice"
             android:layout_width="match_parent"
             android:padding="12dp"
             android:layout_margin="16dp"
             android:layout_height="wrap_content"
             android:text="Flows Practice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/showEspressoPractice"
+            android:onClick="showEspressoPractice"
+            android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:text="Espresso Practice"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

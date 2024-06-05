@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class FlowsPracticeViewModel : ViewModel() {
@@ -23,6 +22,7 @@ class FlowsPracticeViewModel : ViewModel() {
     private val _uiEvent2 = MutableSharedFlow<String>()
     val uiEvent2 = _uiEvent2.asSharedFlow()
     /////////
+
 
     ////// handles state
     private val _uiState1 = MutableStateFlow<List<String>>(emptyList())
@@ -45,7 +45,9 @@ class FlowsPracticeViewModel : ViewModel() {
 
     fun getUiState1() {
         viewModelScope.launch{
-            _uiState1.update { repo.getItems1() }
+            val items = repo.getItems1()
+            //_uiState1.update { items }
+            _uiState1.value =  items
         }
     }
 

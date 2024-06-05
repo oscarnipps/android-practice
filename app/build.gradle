@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
+    id 'de.mannodermaus.android-junit5' version "1.9.3.0" //needed to make junit 5 work
 }
 
 android {
@@ -40,11 +41,11 @@ android {
 
 dependencies {
     implementation 'androidx.activity:activity:1.8.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    testImplementation 'junit:junit:4.12'
     def nav_version = "2.7.7"
     def lifecycle_version = "2.5.1"
 
-    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
 
     //recyclerview
     implementation "androidx.recyclerview:recyclerview:1.3.2"
@@ -52,24 +53,24 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
     //viewmodel delegation extensions
-    implementation 'androidx.activity:activity-ktx:1.8.2'
+    implementation 'androidx.activity:activity-ktx:1.9.0'
 
     //timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     //coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
-    implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //lifecycle
     implementation 'androidx.lifecycle:lifecycle-process:2.7.0'
 
     //fragment
-    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    implementation 'androidx.fragment:fragment-ktx:1.7.0'
 
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -77,10 +78,26 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
-    //coroutines testing
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta'
-
+    ////// test dependencies ///////
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    //coroutines testing
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta'
+    //espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.5.1'
+    androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.5.1'
+    // can be either "implementation" or "androidTestImplementation", depending on the need
+    androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.5.1'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.5.1'
+    //junit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    //turbine
+    testImplementation 'app.cash.turbine:turbine:1.0.0'
+    ////// test dependencies ///////
 }

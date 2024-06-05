@@ -3,16 +3,16 @@ package com.android.android_practice.coroutines
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
-import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CoroutinePracticeRepoTest(){
 
     private lateinit var repo : CoroutinePracticeRepo
 
-    @Before
+    @BeforeEach
     fun setUp() {
        repo = CoroutinePracticeRepo()
     }
@@ -49,6 +49,8 @@ class CoroutinePracticeRepoTest(){
         *   are no longer switched because threading would to be handled by the switched thread
         *
         * -  multiple test dispatchers must always share the same scheduler ( testScheduler)
+        *
+        * -  'backgroundScope' : anything launched in this scope will automatically be cancelled at the end of the test
         *
         */
 

@@ -22,6 +22,12 @@
         android:theme="@style/Theme.Androidpractice"
         tools:targetApi="31">
         <activity
+            android:name=".espresso_practice.SecondEspressoPracticeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".espresso_practice.EspressoPracticeActivity"
+            android:exported="false" />
+        <activity
             android:name=".flows.FlowsPracticeActivity"
             android:exported="false" />
         <activity

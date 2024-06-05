@@ -3,21 +3,24 @@ package com.android.android_practice.coroutines
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CoroutinesPracticeViewModelTest {
+@ExtendWith(MainDispatcherRule::class)
+class
+CoroutinesPracticeViewModelTest {
 
-    @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
+    //use when you're working with junit4 ( the class needs to inherit from 'TestWatcher' and override starting and finishing methods)
+    //@get:Rule
+    //val mainDispatcherRule = MainDispatcherRule()
 
     private lateinit var viewModel: CoroutinesPracticeViewModel
 
-    @Before
+    @BeforeEach
     fun setUp() {
         viewModel = CoroutinesPracticeViewModel()
     }
@@ -30,7 +33,7 @@ class CoroutinesPracticeViewModelTest {
     }
 
 
-    @After
+    @AfterEach
     fun tearDown() {
     }
 }

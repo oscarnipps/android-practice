@@ -6,7 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="16dp"
     android:background="#6721E3"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/student_item_container"
+    >
 
     <TextView
         android:id="@+id/name"
