@@ -28,6 +28,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 /*
 * Notes :
@@ -272,10 +273,10 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
         Timber.d("exception caught : $errorMessage")
     }
 
-    private fun showCallBackCoroutine() {
+    private fun showCancellableCallBackCoroutine() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val result = coroutineCallback()
+                val result = coroutineCancellableCallback()
                 println(result)
             }
         }
@@ -291,7 +292,7 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
         }
     }
 
-    private suspend  fun coroutineCallback(): String = suspendCancellableCoroutine { continuation ->
+    private suspend  fun coroutineCancellableCallback(): String = suspendCancellableCoroutine { continuation ->
         val callback = object : ResultCallback { // Implementation of some callback interface
             override fun onCompleted(result: String) {
                 // Resume coroutine with a value provided by the callback
@@ -310,6 +311,20 @@ class CoroutinesPracticeActivity : AppCompatActivity() {
         continuation.invokeOnCancellation { api.unregister(callback) }
         // At this point the coroutine is suspended by suspendCancellableCoroutine until callback fires
     }
+
+    private suspend fun coroutineCallback() = suspendCoroutine<String> { continuation ->
+        val callback = object : ResultCallback{
+            override fun onCompleted(result: String) {
+                continuation.resume(result)
+            }
+
+            override fun onError(cause: Throwable) {
+                continuation.resumeWithException(cause)
+            }
+
+        }
+    }
+
 
     private suspend  fun flowCallback() = callbackFlow<String> {
         val callback = object : ResultCallback { // Implementation of some callback interface

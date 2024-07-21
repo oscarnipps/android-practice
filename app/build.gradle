@@ -3,7 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
-    id 'de.mannodermaus.android-junit5' version "1.9.3.0" //needed to make junit 5 work
+    id 'de.mannodermaus.android-junit5' version "1.9.3.0"
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.firebase.firebase-perf'//needed to make junit 5 work
 }
 
 android {
@@ -40,7 +43,22 @@ android {
 }
 
 dependencies {
+    //////// firebase ///////
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:33.1.0')
+
+    // Declare the dependencies for the desired Firebase products without specifying versions
+    // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-perf'
+    //////// firebase ///////
+
+
     implementation 'androidx.activity:activity:1.8.0'
+
+
+
     testImplementation 'junit:junit:4.12'
     def nav_version = "2.7.7"
     def lifecycle_version = "2.5.1"

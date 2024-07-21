@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <entry>
+        <key>feature_1_button</key>
+        <value>false</value>
+    </entry>
+
+    <entry>
+        <key>feature_2_button</key>
+        <value>false</value>
+    </entry>
+
+    <entry>
+        <key>feature_3_button</key>
+        <value>false</value>
+    </entry>
+
+
+</defaultsMap>

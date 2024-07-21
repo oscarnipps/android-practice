@@ -32,7 +32,7 @@ class CoroutinePracticeRepoTest(){
         *
         * - TestDispatcher is just an interface and is of 2 types :
         *   -> StandardTestDispatcher : queues work / coroutines on the scheduler and also can be advanced manually
-        *   -> UnconfinedTestDispatcher : is used as the main dispatcher aka for the main thread
+        *   -> UnconfinedTestDispatcher : is used as the main dispatcher aka for the main thread and also used for coroutines that collect flows
         *
         * - when actual code has operations running in a separate thread other than the test thread (i.e TestDispatcher within the TestScope)
         *  you need to use StandardTestDispatcher which queues up the work on the scheduler so it's best to always inject dispatchers where needed
@@ -54,7 +54,7 @@ class CoroutinePracticeRepoTest(){
         *
         */
 
-        //would have taken 15 seconds if the StandardTestDispatcher was not used as during the execution it switched threads
+        //would have taken 15 seconds if the StandardTestDispatcher was not used as during the execution within the repo class it switched threads
         repo = CoroutinePracticeRepo(
             ioDispatcher = StandardTestDispatcher(testScheduler)
         )
