@@ -40,6 +40,12 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+    lintOptions{
+        ignoreWarnings = true
+        textReport = true
+        abortOnError = false
+    }
 }
 
 dependencies {

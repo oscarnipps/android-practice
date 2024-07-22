@@ -1,0 +1,54 @@
+#this workflow runs when a tag is created which would deploy to alpha testers i.e testers within the organization
+#run debug unit tests and generate test report artifact
+
+#name of the workflow
+name: "Practice 1 Workflow"
+
+run-name: "practice-1-workflow run name"
+
+on:
+  push:
+    tags:
+      - 'v**-alpha'
+
+jobs:
+  # id of the job that holds the configuration data (think of it as a map id-configuration data)
+  practice-1-job1:
+
+    #this is the display name in the github UI
+    name: "practice 1 job 1"
+
+    #would execute on a runner machine and execute one or mor steps (could be github or self hosted)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Assemble Debug Version
+        run: ./gradlew testDebugUnitTest
+
+      - name: Run Lint Debug
+        run: ./gradlew lintDebug
+
+      - name: Upload Test Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
+
+      - name: Upload Lint Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: '**/build/reports/lint-results-*/'
