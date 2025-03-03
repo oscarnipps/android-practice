@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+
+      tools:context=".accessibility.AccessibilityPracticeActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <ImageButton
+          android:background="#ffffff"
+          android:contentDescription="navigation back button"
+          android:id="@+id/back"
+          android:src="@drawable/ic_back"
+          android:padding="8dp"
+          android:layout_width="52dp"
+          android:layout_height="52dp"/>
+
+      <!--custom header-->
+      <FrameLayout
+          android:id="@+id/custom_header"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+          <!--this image does not have a meaningful information so contentDesc is null-->
+          <ImageView
+              android:contentDescription="@null"
+              android:layout_width="180dp"
+              android:layout_height="180dp"
+              android:layout_gravity="center_horizontal"
+              android:scaleType="centerCrop"
+              android:src="@drawable/apple_img" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom|center_horizontal"
+              android:layout_marginTop="8dp"
+              android:layout_marginBottom="16dp"
+              android:text="Accessibility Diet Plan"
+              android:textStyle="bold"
+              android:textSize="21sp" />
+
+        </LinearLayout>
+
+      </FrameLayout>
+      <!--custom header end-->
+
+      <EditText
+          android:padding="16dp"
+          android:id="@+id/diet_comment_box"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          android:hint="Enter Diet"
+          android:textAlignment="center"/>
+
+      <TextView
+          android:id="@+id/breakfast"
+          android:background="#2867CA"
+          android:textColor="#FFFFFF"
+          android:fontFamily="monospace"
+          android:layout_width="match_parent"
+          android:padding="12dp"
+          android:textAlignment="center"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|center_horizontal"
+          android:layout_margin="16dp"
+          android:text="Breakfast Plan"
+          android:textStyle="bold"
+          android:textSize="16sp" />
+
+      <TextView
+          android:id="@+id/lunch"
+          android:background="#2867CA"
+          android:textColor="#FFFFFF"
+          android:fontFamily="monospace"
+          android:layout_width="match_parent"
+          android:padding="12dp"
+          android:textAlignment="center"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|center_horizontal"
+          android:layout_margin="16dp"
+          android:text="Lunch Plan"
+          android:textStyle="bold"
+          android:textSize="16sp" />
+
+      <TextView
+          android:id="@+id/dinner"
+          android:background="#2867CA"
+          android:textColor="#FFFFFF"
+          android:fontFamily="monospace"
+          android:layout_width="match_parent"
+          android:padding="12dp"
+          android:textAlignment="center"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|center_horizontal"
+          android:layout_margin="16dp"
+          android:text="Dinner Plan"
+          android:textStyle="bold"
+          android:textSize="16sp" />
+
+      <Switch
+          android:layout_margin="8dp"
+          android:paddingTop="16dp"
+          android:paddingBottom="16dp"
+          android:paddingStart="8dp"
+          android:id="@+id/diet_promo_switch"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Activate Diet Promo"
+          />
+
+      <CheckBox
+          android:layout_margin="8dp"
+          android:paddingStart="16dp"
+          android:text="Vegan Option"
+          android:id="@+id/vegan_option"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+  </ScrollView>
+</layout>

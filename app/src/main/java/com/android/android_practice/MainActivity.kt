@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.android.android_practice.accessibility.AccessibilityPracticeActivity
 import com.android.android_practice.activities.FirstActivity
 import com.android.android_practice.coroutines.CoroutinesPracticeActivity
 import com.android.android_practice.espresso_practice.EspressoPracticeActivity
@@ -88,6 +89,10 @@ class MainActivity : AppCompatActivity() {
 
     fun showFirebasePractice(view: View) {
         Intent(this , FirebasePracticeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }    fun showAccessibilityPracticeActivity(view: View) {
+        Intent(this , AccessibilityPracticeActivity::class.java).apply {
             startActivity(this)
         }
     }
